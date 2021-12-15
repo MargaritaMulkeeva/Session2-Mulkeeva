@@ -1,0 +1,85 @@
+﻿<Page x:Class="Product.Pages.ProductPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Product.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="ProductPage" FontFamily="Gabriola">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="#CEFFF9"/>
+        <TextBlock Text="Поиск" Grid.Row="0" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="33,19,0,0" Width="66"/>
+        <TextBox FontSize="20" Name="TBSearch" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="104,30,0,0" Width="185" Height="26" TextChanged="TBSearch_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+
+        <TextBlock Text="Сортировка" Grid.Row="0" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="315,19,0,0" Width="127"/>
+        <ComboBox Name="CBSort" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="447,30,0,0" Width="121" FontSize="15" Height="26" SelectionChanged="CBSort_SelectionChanged">
+            <TextBlock Text="По убыванию"/>
+            <TextBlock Text="По возрастанию"/>
+        </ComboBox>
+
+        <TextBlock Text="Фильтрация" Grid.Row="0" FontSize="30" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="584,19,0,0" Width="127"/>
+        <ComboBox Name="CBFiltr" Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Left" DisplayMemberPath="TypeOfProduct1" SelectedItem="{Binding TypeOfProduct}" Margin="726,30,0,0" Width="141" FontSize="15" Height="26" SelectionChanged="CBFiltr_SelectionChanged"/>
+
+        <ListView Name="LV" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="16,16,0,0" Height="382" Width="866">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Vertical" HorizontalAlignment="Center"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Height="150" Width="859">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.3*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image x:Name="logo" Grid.Column="0" Grid.RowSpan="3" Height="100" Width="100" Source="{Binding Path=Logo}"/>
+
+                        <TextBlock Text="{Binding TypeOfProduct.TypeOfProduct1}" Grid.Row="0" Grid.Column="1" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                        <TextBlock Text="|" Grid.Row="0" Grid.Column="1" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="90 0 0 0"/>
+                        <TextBlock Text="{Binding NameOfProduct}" Grid.Row="0" Grid.Column="1" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="120 0 0 0"/>
+                        <TextBlock Text="{Binding Article}" Grid.Row="1" Grid.Column="1" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 0 0 0"/>
+                        <TextBlock Text="{Binding MinPrice}" Grid.Row="0" Grid.Column="1" FontSize="20" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="400 0 0 0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Name="btnAdd" Background="#00CC76" Content="Добавить" FontSize="20" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="32" Width="156" Margin="726,6,0,0" Click="BtnAdd_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button Name="btnEdit" Background="#00CC76" Content="Изменить" FontSize="20" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Left" Height="32" Width="156" Margin="522,6,0,0" Click="BtnEdit_Click">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+    </Grid>
+</Page>

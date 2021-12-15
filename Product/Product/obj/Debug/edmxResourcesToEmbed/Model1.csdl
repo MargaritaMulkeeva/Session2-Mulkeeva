@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="user15Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="History">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeOfHistory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IDProduct" Type="Int64" Nullable="false" />
+    <Property Name="MinPrice" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="MaterialShort">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameMaterial" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="IdTypeOfMaterial" Type="Int64" />
+    <Property Name="Count" Type="Int32" />
+    <Property Name="IdTypeOfEdinica" Type="Int64" />
+    <Property Name="CountOnSklad" Type="Int32" />
+    <Property Name="MinOstatok" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="TypeOfEdinica" Relationship="Self.FK_MaterialShort_TypeOfEdinica" FromRole="MaterialShort" ToRole="TypeOfEdinica" />
+    <NavigationProperty Name="TypeOfMaterial" Relationship="Self.FK_MaterialShort_TypeOfMaterial" FromRole="MaterialShort" ToRole="TypeOfMaterial" />
+    <NavigationProperty Name="ProductMaterial" Relationship="Self.FK_ProductMaterial_MaterialShort" FromRole="MaterialShort" ToRole="ProductMaterial" />
+  </EntityType>
+  <EntityType Name="ProductDetails">
+    <Key>
+      <PropertyRef Name="IDView" />
+    </Key>
+    <Property Name="IDView" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDTypeProduct" Type="Int64" />
+    <Property Name="NameProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Article" Type="Int32" />
+    <Property Name="CountTypeMaterial" Type="Int32" />
+    <Property Name="CostPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MinPriceAgent" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TypeOfProduct" Relationship="Self.FK_ProductDetails_TypeOfProduct" FromRole="ProductDetails" ToRole="TypeOfProduct" />
+  </EntityType>
+  <EntityType Name="ProductMaterial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IDOfProduct" Type="Int64" />
+    <Property Name="IDOfMaterial" Type="Int64" />
+    <Property Name="NeseccaryCount" Type="Int32" />
+    <NavigationProperty Name="MaterialShort" Relationship="Self.FK_ProductMaterial_MaterialShort" FromRole="ProductMaterial" ToRole="MaterialShort" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_ProductMaterial_Products" FromRole="ProductMaterial" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameOfProduct" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Article" Type="Int32" />
+    <Property Name="MinPrice" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="Logo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IDtypeOfProduct" Type="Int64" />
+    <Property Name="CountPeople" Type="Int32" />
+    <Property Name="NumberCex" Type="Int32" />
+    <NavigationProperty Name="ProductMaterial" Relationship="Self.FK_ProductMaterial_Products" FromRole="Products" ToRole="ProductMaterial" />
+    <NavigationProperty Name="TypeOfProduct" Relationship="Self.FK_Products_TypeOfProduct" FromRole="Products" ToRole="TypeOfProduct" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TypeOfEdinica">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Edinica" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MaterialShort" Relationship="Self.FK_MaterialShort_TypeOfEdinica" FromRole="TypeOfEdinica" ToRole="MaterialShort" />
+  </EntityType>
+  <EntityType Name="TypeOfMaterial">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeOfMaterial1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MaterialShort" Relationship="Self.FK_MaterialShort_TypeOfMaterial" FromRole="TypeOfMaterial" ToRole="MaterialShort" />
+  </EntityType>
+  <EntityType Name="TypeOfProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TypeOfProduct1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ProductDetails" Relationship="Self.FK_ProductDetails_TypeOfProduct" FromRole="TypeOfProduct" ToRole="ProductDetails" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_TypeOfProduct" FromRole="TypeOfProduct" ToRole="Products" />
+  </EntityType>
+  <Association Name="FK_MaterialShort_TypeOfEdinica">
+    <End Role="TypeOfEdinica" Type="Self.TypeOfEdinica" Multiplicity="0..1" />
+    <End Role="MaterialShort" Type="Self.MaterialShort" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfEdinica">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MaterialShort">
+        <PropertyRef Name="IdTypeOfEdinica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MaterialShort_TypeOfMaterial">
+    <End Role="TypeOfMaterial" Type="Self.TypeOfMaterial" Multiplicity="0..1" />
+    <End Role="MaterialShort" Type="Self.MaterialShort" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfMaterial">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="MaterialShort">
+        <PropertyRef Name="IdTypeOfMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterial_MaterialShort">
+    <End Role="MaterialShort" Type="Self.MaterialShort" Multiplicity="0..1" />
+    <End Role="ProductMaterial" Type="Self.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MaterialShort">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductMaterial">
+        <PropertyRef Name="IDOfMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductDetails_TypeOfProduct">
+    <End Role="TypeOfProduct" Type="Self.TypeOfProduct" Multiplicity="0..1" />
+    <End Role="ProductDetails" Type="Self.ProductDetails" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductDetails">
+        <PropertyRef Name="IDTypeProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ProductMaterial_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="ProductMaterial" Type="Self.ProductMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ProductMaterial">
+        <PropertyRef Name="IDOfProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_TypeOfProduct">
+    <End Role="TypeOfProduct" Type="Self.TypeOfProduct" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfProduct">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="IDtypeOfProduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="user15Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="History" EntityType="Self.History" />
+    <EntitySet Name="MaterialShort" EntityType="Self.MaterialShort" />
+    <EntitySet Name="ProductDetails" EntityType="Self.ProductDetails" />
+    <EntitySet Name="ProductMaterial" EntityType="Self.ProductMaterial" />
+    <EntitySet Name="Products" EntityType="Self.Products" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TypeOfEdinica" EntityType="Self.TypeOfEdinica" />
+    <EntitySet Name="TypeOfMaterial" EntityType="Self.TypeOfMaterial" />
+    <EntitySet Name="TypeOfProduct" EntityType="Self.TypeOfProduct" />
+    <AssociationSet Name="FK_MaterialShort_TypeOfEdinica" Association="Self.FK_MaterialShort_TypeOfEdinica">
+      <End Role="TypeOfEdinica" EntitySet="TypeOfEdinica" />
+      <End Role="MaterialShort" EntitySet="MaterialShort" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MaterialShort_TypeOfMaterial" Association="Self.FK_MaterialShort_TypeOfMaterial">
+      <End Role="TypeOfMaterial" EntitySet="TypeOfMaterial" />
+      <End Role="MaterialShort" EntitySet="MaterialShort" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterial_MaterialShort" Association="Self.FK_ProductMaterial_MaterialShort">
+      <End Role="MaterialShort" EntitySet="MaterialShort" />
+      <End Role="ProductMaterial" EntitySet="ProductMaterial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductDetails_TypeOfProduct" Association="Self.FK_ProductDetails_TypeOfProduct">
+      <End Role="TypeOfProduct" EntitySet="TypeOfProduct" />
+      <End Role="ProductDetails" EntitySet="ProductDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ProductMaterial_Products" Association="Self.FK_ProductMaterial_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductMaterial" EntitySet="ProductMaterial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_TypeOfProduct" Association="Self.FK_Products_TypeOfProduct">
+      <End Role="TypeOfProduct" EntitySet="TypeOfProduct" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
